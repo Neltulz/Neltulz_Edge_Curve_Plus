@@ -1,0 +1,649 @@
+/* Main CSS */
+
+:root {
+    --main-margin: 50px;
+    --main-padding: 50px;
+    --main-width: 75%;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+html {
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+body {
+    background-color: black;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    color: hsl(0, 0%, 60%);
+    margin-left: 15px;
+    margin-right: 15px;
+
+    transition: margin 0.25s ease;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+iframe {
+    border: 0px;
+}
+
+p {
+    
+}
+
+html.sidebarIframeLoaded #sidebar {
+    width: 300px;
+    opacity: 1;
+}
+
+#sidebar {
+    opacity: 0;
+    display: block;
+    overflow: hidden;
+    width: 0px;
+    margin-top: var(--main-margin);
+    margin-right: 20px;
+    height: calc(100vh - ( var(--main-margin) * 2) );
+    transition: width 0.25s ease, margin 0.25s ease;
+}
+
+#sidebar .sidebarTitle {
+    height: 40px;
+    background: hsl(0, 0%, 24%);
+    display: flex;
+    padding-left: 15px;
+    padding-right: 15px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#sidebar #sidebarCloseBtn {
+    z-index: 100;
+    right: 0;
+}
+
+#sidebar .sidebarFixed {
+    height: calc(100vh - (var(--main-margin) * 2) );
+    overflow: hidden;
+    width: 300px;
+    position: fixed;
+    transition: width 0.25s ease;
+}
+
+#sidebar iframe {
+    height: calc(100% - 40px);
+    width: 300px;
+}
+
+.main {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    min-height: calc(100vh - 100px);
+    margin: var(--main-margin) 0px;
+    background-color: hsl(0, 0%, 20%);
+    width: var(--main-width);
+    max-width: 1600px;
+    padding: var(--main-padding);
+
+    transition: margin 0.25s ease, width 0.25s ease;
+}
+
+.mainAddonImage > img {
+    width: 50%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 1em;
+}
+
+.indentSection {
+    margin-left: 25px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: hsl(0, 0%, 85%);
+    margin-top: 1em;
+}
+
+h1 {
+    margin-top: 0px;
+}
+
+h3 {
+    line-height: 1.5;
+    border-bottom: 1px solid gray;
+}
+
+h5 {
+    
+}
+
+li {
+    margin-bottom: 1em;
+    line-height: 1.25;
+}
+
+.badgeBar {
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid gray;
+    text-align: center;
+}
+
+.badgeBar .badge {
+    padding: 5px 10px;
+    height: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8em;
+    margin-bottom: 5px;
+    flex-direction: column;
+    line-height: 1.25;
+    white-space: inherit;
+}
+
+.badgeBar .badgeLeft {
+    font-weight: normal;
+}
+
+.badgeBar .badgeRight {
+    padding-left: 5px;
+    
+}
+
+.badgeBar .badge a {
+    color: white;
+}
+
+mark {
+    display: inline-flex;
+    color: hsl(0, 0%, 80%);
+    color: hsl(39, 100%, 37%);
+    position: relative;
+    padding: 5px 10px;
+    font-size: 0.85em;
+    background-color: transparent;
+}
+
+mark:before {
+    content: "";
+    z-index: -1;
+    display: block;
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    top: 2px;
+    bottom: 2px;
+    border-radius: 5px;
+    background-color: hsla(0, 0%, 0%, 0.15);
+}
+
+.table {
+    background-color: rgb(39, 39, 39);
+    color: gray;
+}
+
+.table-hover {
+
+}
+
+.table td, .table th {
+    border-top: 1px solid hsl(0, 0%, 20%);
+}
+
+.table thead th {
+    border-bottom: 2px solid hsl(210, 58%, 42%);
+}
+
+.table-hover tbody tr:hover {
+    color: white;
+    background-color: hsl(0, 0%, 25%);
+}
+
+.table th.primary,
+.table td.primary {
+    color: white;
+}
+
+.table th.success,
+.table td.success {
+    color: hsl(120, 34%, 50%);
+}
+
+
+.gnu-license-sections {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    
+}
+
+.gnu-license-sections .section {
+    background-color: hsl(0, 0%, 15%);
+    border: 2px solid hsl(117, 0%, 35%);
+}
+
+
+
+.gnu-license-sections .section .header,
+.gnu-license-sections .section .item {
+    padding: 0.75rem;
+}
+
+.gnu-license-sections .section .item:hover {
+    background-color: hsl(0, 0%, 25%);
+}
+
+.gnu-license-sections .section .header {
+}
+
+.gnu-license-sections .section.permissions {
+    grid-column: 1;
+}
+
+.gnu-license-sections .section.conditions {
+    grid-column: 2;
+}
+
+.gnu-license-sections .section.limitations {
+    grid-column: 3;
+}
+
+
+.gnu-license-sections .item:before {
+    content: "";
+    display: inline-flex;
+    width: 12px;
+    height: 12px;
+    border-radius: 1000px;
+    margin-right: 0.75rem;
+}
+
+.gnu-license-sections .section.permissions .item:before {
+    background-color: hsl(117, 57%, 50%);
+}
+
+.gnu-license-sections .section.conditions .item:before {
+    background-color: hsl(210, 58%, 42%);
+}
+
+.gnu-license-sections .section.limitations .item:before {
+    background-color: hsl(1, 55%, 51%);
+}
+
+
+
+.alert {
+    margin: 1em 0px;
+}
+
+.alert-primary {
+    background-color: hsla(195, 53%, 79%, 0.363);
+    color: hsl(195, 15%, 79%);
+}
+
+.pageTitle {
+    display: flex;
+    flex-direction: column;
+    font-size: 2.5em;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    line-height: 1;
+    transition: font-size 0.25s ease;
+}
+
+.pageTitle .versionNum {
+    font-size: 1.25rem;
+    margin-top: 0.7rem;
+    line-height: 1.5;
+}
+
+.versionAndDownloadBar {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.versionAndDownloadBar .badge {
+    padding: 7px 30px;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    transition: font-size 0.25s ease;
+    border-radius: 1000px;
+    white-space: inherit;
+    height: auto;
+    line-height: 1.25;
+}
+
+.versionAndDownloadBar .badge .icon {
+    margin-right: 20px;
+    display: flex;
+    font-size: 1.5rem;
+}
+
+.versionAndDownloadBar .badge .text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.versionAndDownloadBar .badge .text .download {
+    font-weight: 100;
+}
+
+.versionAndDownloadBar .badge .text .versionText {
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.versionAndDownloadBar .reqDependencies {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.versionAndDownloadBar .reqDependencies .reqDepTitle {
+    line-height: 2;
+    margin-bottom: 0.25rem;
+}
+
+.versionAndDownloadBar .reqDependencies .reqDepLinks {
+    text-align: center;
+}
+
+.versionAndDownloadBar .reqDependencies .reqDepLinks a {
+    margin-bottom: 7px;
+}
+
+.versionAndDownloadBar .reqDependencies .reqDepLinks a i {
+    margin-right: 7px;
+}
+
+
+
+.alert {
+
+}
+
+.alert.alert-dark {
+    background-color: hsl(0, 0%, 28%);
+    color: hsl(0, 0%, 70%);
+    border: none;
+}
+
+.alert.quote {
+    
+}
+
+.alert.quote > h1 {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.youtubeVideo {
+    width: 100%;
+    padding-bottom: 56.25%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.youtubeVideo iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.popover[role="tooltip"] {
+    pointer-events: none !important;
+}
+
+.popover {
+    
+}
+
+
+#licenseModal {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: hsla(0, 0%, 0%, 0.452);
+}
+
+#licenseModal .modal-dialog {
+    width: 704px;
+    min-width: 704px;
+    max-width: 704px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#licenseModal .modal-dialog .modal-content {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: hsl(0, 0%, 13.3%);
+    color: hsl(0, 0%, 74%);
+}
+
+#licenseModal .modal-dialog .modal-content .modal-body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+}
+
+#licenseModal .modal-dialog .modal-content .modal-body .spinner {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+#licenseModal .modal-dialog .modal-content .modal-body.iframeLoaded .spinner {
+    display: none;
+}
+
+#licenseModal .modal-dialog .modal-content iframe {
+    width: 100%;
+    height: 100%;
+    
+}
+
+#licenseModal .modal-footer {
+    background-color: hsl(0, 0%, 24%);
+    border-top: 0px;
+}
+
+#licenseModalBtn {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#licenseModalBtn > i {
+    margin-right: 5px;
+}
+
+@media (max-width: 1200px) {
+
+    #sidebar,
+    html.sidebarIframeLoaded #sidebar,   
+    #sidebar .sidebarFixed,   
+    html.sidebarIframeLoaded #sidebar .sidebarFixed
+    {
+        width: 0px;
+        margin-right: 0px;
+    }
+
+    body {
+        margin: 0px;
+    }
+
+}
+
+@media (max-width: 1024px) {
+
+    :root {
+        --main-margin: 25px;
+        --main-padding: 25px;
+        --main-width: 85%;
+    }
+
+    .table {
+        font-size: 0.9em;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table tr {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 2px solid hsl(0, 0%, 20%);
+        padding: 0.75rem;
+    }
+
+    .table td, .table th {
+        border: none;
+        padding: 0px;
+        line-height: 2;
+        display: block;
+    }
+
+    .table td:before {
+        color: hsl(240, 100%, 78%);
+    }
+
+    .table td.hotkey:before {
+        content: "Hotkey: ";
+    }
+
+    .table td.result:before {
+        content: "Result: ";
+    }
+
+    .table td.command:before {
+        content: "Command: ";
+    }
+
+    .table td.properties:before {
+        content: "Properties: ";
+    }
+
+    .badgeBar .badge {
+        font-size: 0.7em;
+    }
+
+    .gnu-license-sections {
+        grid-template-columns: 1fr;
+    }
+    
+    .gnu-license-sections .section.permissions {
+        grid-column: 1;
+    }
+    
+    .gnu-license-sections .section.conditions {
+        grid-column: 1;
+    }
+    
+    .gnu-license-sections .section.limitations {
+        grid-column: 1;
+    }
+
+    #licenseModal .modal-dialog {
+        width: 600px;
+        min-width: 600px;
+        max-width: 600px;
+    }
+
+    #licenseModal .modal-dialog .modal-content pre {
+        font-size: 0.75rem;
+        width: 556px;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    :root {
+        --main-margin: 0px;
+        --main-padding: 15px;
+        --main-width: 100%;
+    }
+
+
+
+
+    .pageTitle {
+        font-size: 1.5em;
+    }
+
+    .versionAndDownloadBar .badge {
+        font-size: 1rem;
+    }
+
+    .table {
+        font-size: 0.775em;
+    }
+
+    .badgeBar .badge {
+        line-height: 1.25;
+        height: auto;
+        padding-top: 0.25em;
+        padding-bottom: 0.25em;
+    }
+
+    .badgeBar .badge {
+        font-size: 0.75em;
+    }
+
+    #licenseModal .modal-dialog {
+        width: calc(100% - 16px);
+        max-width: calc(100% - 16px);
+        min-width: calc(100% - 16px);
+    }
+
+    #licenseModal .modal-dialog .modal-content pre {
+        width: calc(100% - 45px);
+        font-size: 0.65rem;
+        white-space: pre-wrap;
+    }
+
+}

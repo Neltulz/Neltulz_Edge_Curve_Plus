@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Neltulz - Edge Curve Plus - ReadMe</title>
+
+        <link href="readme_html_files/fontawesome-free-5.10.1-web/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="readme_html_files/css/bootstrap-reboot.min.css">
+        <link rel="stylesheet" href="readme_html_files/css/bootstrap.min.css">
+        <link rel="stylesheet" href="readme_html_files/css/styles.css">
+
+        
+        <script src="readme_html_files/js/jquery-3.4.1.min.js"></script>
+        <script src="readme_html_files/js/popper.min.js"></script>
+        <script src="readme_html_files/js/bootstrap.min.js"></script>
+        <script src="readme_html_files/js/main.js"></script>
+    </head>
+
+    <body>
+
+        <!-- Script that shows the sidebar whenever it finishes loading.  Great for preventing the sidebar from showing when offline -->
+        <script>
+            function sidebarIframeLoaded() {
+                $( document ).ready(function() {
+                    $('html').addClass('sidebarIframeLoaded')
+                });
+            }
+        </script>
+        
+        <!-- Sidebar with other Neltulz Addons-->
+        <aside id="sidebar">
+            <div class="sidebarFixed">
+                <div class="sidebarTitle">All Addons </div>
+                <iframe onload="sidebarIframeLoaded()"
+                src="https://www.logichaos.com/neltulz_blender_addons/neltulz_addon_sidebar/neltulz_addons_sidebar.html"></iframe>
+            </div>
+        </aside>
+
+        <!-- The License Modal that pops up when a user clicks the show full license button -->
+        <div class='modal fade' id='licenseModal'>
+            <div class='modal-dialog modal-lg'>
+                <div class='modal-content'>
+                    <div class='modal-body'>
+
+                            <script>
+                            
+                            function iframeLoaded() {
+                                $('#licenseModal .modal-body').addClass('iframeLoaded')
+                            }
+
+                            </script>
+
+                    </div>
+                    <div class='modal-footer'>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main">
+
+            <picture class="mainAddonImage">
+                <source srcset="readme_html_files/img/logo.webp" type="image/webp">
+                <source srcset="readme_html_files/img/logo.png" type="image/png"> 
+                <img src="readme_html_files/img/logo.png" alt="Logo">
+            </picture>
+
+            <h1 class="pageTitle">
+                Neltulz - Edge Curve Plus<br><span class="versionNum">Version: 1.0.0<!--<br>Last Update: 8/22/2019--></span>
+            </h1>
+
+            <div class="versionAndDownloadBar">
+                
+                <p>
+                    <a href="https://gum.co/neltulz_smart_frame_selection" target="_blank" class="badge badge-primary downloadLink">
+                        <span class="icon">
+                            <i class="fas fa-download"></i>
+                        </span>
+                        <span class="text">
+                            <span class="download">Download</span><span class="versionText">Latest Version</span>
+                        </span>
+                    </a>
+                </p>
+
+                <div class="reqDependencies"><span class="reqDepTitle">Required Dependencies:</span>
+                    <div class="reqDepLinks">
+                        <a class="btn btn-secondary" href="https://github.com/BenjaminSauder/EdgeFlow/releases" target="_blank"><i class="fas fa-download"></i> EdgeFlow</a>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="badgeBar">
+
+                <div class="badge badge-warning">
+                    <span class="badgeLeft">
+                        Blender Version:
+                    </span>
+                    <span class="badgeRight">
+                        2.8
+                    </span>
+                </div>
+
+                <div class="badge badge-success">
+                    <span class="badgeLeft">
+                        Author:
+                    </span>
+                    <span class="badgeRight">
+                        Neil V. Moore
+                    </span>
+                </div>
+
+                <div class="badge badge-info">
+                    <span class="badgeLeft">
+                        Original Release Date:
+                    </span>
+                    <span class="badgeRight">
+                        8/22/2019
+                    </span>
+                </div>
+
+                <div class="badge badge-secondary">
+                    <span class="badgeLeft">
+                        License:
+                    </span>
+                    <span class="badgeRight">
+                        <a target="_blank" href="https://choosealicense.com/licenses/gpl-3.0/">GNU GPL v3.0</a>
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="pageDesc">
+                <p>Blender Addon that allows you to quickly insert edge loops with flow.  (Requires the <a href="https://github.com/BenjaminSauder/EdgeFlow/releases" target="_blank">EdgeFlow addon</a> for Blender)</p>
+            </div>
+
+            <!--<div class="youtubeVideo">
+                insert youtube iframe embed code here
+            </div>-->
+
+            <h3>Table of Contents</h3>
+
+            <ul>
+                <li><a href="#keyFeatures">Key Features</a></li>
+                <li><a href="#dependencies">Dependencies</a></li>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#howToUse">How to Use</a></li>
+                <li><a href="#knownIssues">Known Issues & Limitations</a></li>
+                <li><a href="#license">License</a></li>
+                <li><a href="#changelog">Changelog</a></li>
+                <li><a href="#links">Links</a></li>
+                <li><a href="#specialThanks">Special Thanks</a></li>
+                <li><a href="#contact">Contact Me, Report a Bug, or Request a thing</a></li>
+            </ul>
+
+            <h3 id="keyFeatures">Key Features</h3>
+
+            <ul>
+                <li>Insert <mark>single edge loop</mark> with flow</li>
+                <li>Insert <mark>multiple edge loops</mark> with flow</li>
+                <li>Control the <mark>tension</mark> of the edge loops</li>
+                <li>Control the <mark>number of iterations</mark> (more iterations = better result)</li>
+                <li>Control the <mark>minAngle</mark> of the edge loops.  Higher numbers can fix problems like, bulging.</li>
+            </ul>
+
+            <h3 id="dependencies">Dependencies</h3>
+
+            <div class="indentSection">
+                <p><mark>Neltulz - Edge Curve Plus</mark> requires the <mark>EdgeFlow</mark> addon for blender to be installed prior to using.
+                Download the latest version here: <a href="https://github.com/BenjaminSauder/EdgeFlow/releases" target="_blank">EdgeFlow
+                Addon for Blender</a></p>
+
+                <div class="alert alert-success" role="alert">Special thanks to <a href="https://github.com/BenjaminSauder" target="_blank">Benjamin Sauder</a> for creating the EdgeFlow addon for Blender, and implementing some 
+                feature requests to make this addon possible!</div>
+            </div>
+           
+
+            <h3 id="installation">Installation</h3>
+
+            <ol>
+                <li>Download the <mark>Neltulz - Edge Curve Plus</mark> zip file anywhere on your
+                computer.</li>
+                
+                <li>Run Blender.</li>
+                
+                <li>Go to <mark>Edit > Preferences</mark>.</li>
+                
+                <li>In the left sidebar, go to <mark>Add-ons</mark>.</li>
+                
+                <li>At the top right, click <mark>Install</mark>.</li>
+                
+                <li>Browse for the <mark>Neltulz - Edge Curve Plus</mark> zip file and click Install Add-on
+                from File <br>Alternatively, you may double click the zip file to install it.</li>
+                
+                <li>Next to <mark>Neltulz - Edge Curve Plus</mark>, enable the checkbox.</li>
+                
+                <li>(OPTIONAL) If you are manually saving preferences (instead of automatically), at the lower left of the preferences window, click <mark>Save Preferences</mark> and
+                close the preferences window.</li>
+            </ol>
+
+            <h3 id="howToUse">How to Use</h3>
+            
+            <div class="indentSection">
+                
+                <h5>Hotkeys</h5>
+                
+                <div class="alert alert-primary" role="alert">
+                    Note: Hotkey works in both <strong>"Object"</strong> and <strong>"Mesh"</strong> mode
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Hotkey</th>
+                            <th scope="col">Result</th>
+                            <th scope="col">Command</th>
+                            <th scope="col">Properties</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="hotkey primary">ALT+SHIFT+E</td>
+                            <td class="result success">Insert Edge Loop(s) with Flow</td>
+                            <td class="command">object.neltulz_edge_curve_plus</td>
+                            <td class="properties">None</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div><!-- END Indent Section-->
+        
+            <h3 id="knownIssues">Known Issues & Limitations</h3>
+
+            <ul>
+                <li>Unable to modify history once edge loops are added.</li>
+                <li>Unable to <mark>Repeat Last</mark> (workaround: Just use <mark>ALT+SHIFT+E</mark> hotkey)</li>
+            </ul>
+
+            <h3 id="license">License</h3>
+
+            <p>This addon is using the <mark><a href="https://choosealicense.com/licenses/gpl-3.0/"
+            target="_blank">GNU GPL v3.0</a></mark>.</p>
+
+            <div class="alert alert-dark quote">
+
+                <h1>From the GNU GPL v3.0:</h1>
+
+                <p>Permissions of this strong copyleft license are conditioned on making available complete source code
+                of licensed works and modifications, which include larger works using a licensed work, under the same
+                license. Copyright and license notices must be preserved. Contributors provide an express grant of
+                patent rights.</p>
+
+                <div class="gnu-license-sections">
+
+                    <div class="section permissions">
+                        
+                        <div class="header">Permissions</div>
+                        
+                        <div class="item" data-container="body" data-toggle="popover" data-trigger="hover"
+                        data-placement="top" data-content="This software and derivatives may be used for commercial
+                        purposes.">Commercial use</div>
+                        
+                        <div class="item" data-container="body" data-toggle="popover" data-trigger="hover"
+                        data-placement="top" data-content="This software may be distributed.">Distribution</div>
+                        
+                        <div class="item" data-container="body" data-toggle="popover" data-trigger="hover"
+                        data-placement="top" data-content="This software may be modified.">Modification</div>
+                        
+                        <div class="item" data-container="body" data-toggle="popover" data-trigger="hover"
+                        data-placement="top" data-content="This license provides an express grant of patent rights from
+                        contributors.">Patent use</div>
+                        
+                        <div class="item" data-container="body" data-toggle="popover" data-trigger="hover"
+                        data-placement="top" data-content="This software may be used and modified in private.">Private
+                        use</div>
+                    
+                    </div>
+
+                    <div class="section conditions">
+                        
+                        <div class="header">Conditions</div>
+                        
+                        <div class="item" data-container="body" data-toggle="popover" data-trigger="hover"
+                        data-placement="top" data-content="Source code must be made available when the software is
+                        distributed.">Disclose source</div>
+                        
+                        <div class="item" data-container="body" data-toggle="popover" data-trigger="hover"
+                        data-placement="top" data-content="A copy of the license and copyright notice must be included
+                        with the software.">License and copyright notice</div>
+                        
+                        <div class="item" data-container="body" data-toggle="popover" data-trigger="hover"
+                        data-placement="top" data-content="Modifications must be released under the same license when
+                        distributing the software. In some cases a similar or related license may be used.">Same
+                        license</div>
+                        
+                        <div class="item" data-container="body" data-toggle="popover" data-trigger="hover"
+                        data-placement="top" data-content="Changes made to the code must be documented.">State
+                        changes</div>
+                    
+                    </div>
+
+                    <div class="section limitations">
+                        
+                        <div class="header">Limitations</div>
+                        
+                        <div class="item" data-container="body" data-toggle="popover" data-trigger="hover"
+                        data-placement="top" data-content="This license includes a limitation of
+                        liability.">Liability</div>
+                        
+                        <div class="item" data-container="body" data-toggle="popover" data-trigger="hover"
+                        data-placement="top" data-content="The license explicitly states that it does NOT provide any
+                        warranty.">Warranty</div>
+                    
+                    </div>
+
+                </div><!-- END gnu-license-table -->
+
+                <button id="licenseModalBtn" class="btn btn-primary"><i class="fas fa-plus"></i> Show the full license</button>
+                
+
+                
+            </div><!-- END Alert Quote-->
+
+            <h3 id="changelog">Changelog</h3>
+
+                <ul>
+                    <li>2019-08-22 - First release!</li>
+                </ul>
+
+            <h3 id="links">Links</h3>
+
+                <ul>
+                    <li><a href="https://discordapp.com/invite/blender" target="_blank">Blender Discord</a> - For
+                    discussing all things blender!</li>
+                    <li><a href="https://www.twitch.tv/floatharr" target="_blank">Floatharr's Twitch Stream</a> where he
+                    does all things art, and blender work</li>
+                </ul>
+
+            <h3 id="specialThanks">Special Thanks</h3>
+
+            <ul>
+                <li>Benjamin Sauder for <a href="https://github.com/BenjaminSauder/EdgeFlow/releases" target="_blank">EdgeFlow addon</a>!</li>
+                <li>JordanS</li>
+                <li>Bobbe</li>
+                <li>Don'tKnow</li>
+                <li>cytoo - For bug reporting and feature requests</li>
+                <li>Anyone I forgot</li>
+            </ul>
+
+            <h3 id="contact">Contact Me, Report a Bug, or Request a thing</h3>
+                
+                <p>If you would like to contact me, please send me an e-mail at <a href="mailto:neilvmoore@gmail.com">neilvmoore@gmail.com</a></p>
+
+        </div>
+        
+    </body>
+
+</html>
+
