@@ -6,17 +6,20 @@ bl_info = {
     "version" : (1, 0, 1),
     "location" : "View3D",
     "warning" : "",
-    "category" : "Generic"
+    "category" : "3D View",
+    "tracker_url": "https://www.logichaos.com/neltulz_blender_addons/neltulz_contact_page/neltulz_contact_page",
+    "wiki_url": "https://www.logichaos.com/neltulz_blender_addons/neltulz_edge_curve_plus/README_Neltulz_Edge_Curve_Plus"
 }
 
 # -----------------------------------------------------------------------------
-#   Import Classes and/or functions     
+#   Import Classes and/or functions
 # -----------------------------------------------------------------------------  
 
 import bpy
 
 from . properties import NeltulzEdgeCurvePlus_IgnitProperties
 from . main_ot import OBJECT_OT_NeltulzEdgeCurvePlus
+from . misc_ot import OBJECT_OT_NeltulzEdgeCurvePlus_ResetAllSettings
 from . addon_preferences import OBJECT_OT_NeltulzEdgeCurvePlus_Preferences
 from . panels import OBJECT_PT_NeltulzEdgeCurvePlus
 
@@ -32,6 +35,7 @@ PendingDeprecationWarning
 classes = (
     NeltulzEdgeCurvePlus_IgnitProperties,
     OBJECT_OT_NeltulzEdgeCurvePlus,
+    OBJECT_OT_NeltulzEdgeCurvePlus_ResetAllSettings,
     OBJECT_OT_NeltulzEdgeCurvePlus_Preferences,
     OBJECT_PT_NeltulzEdgeCurvePlus,
 )
