@@ -12,7 +12,7 @@ def neltulz_edge_curve_plus_register_keymaps(addon_keymaps):
     def createEdgeCurvePlusKeymap():
         #create shortcuts for keymap
         kmi = km.keymap_items.new("object.neltulz_edge_curve_plus", type = "E", ctrl=False, shift=True, alt=True, value = "PRESS")
-        #kmi.properties.PROPERTYNAME = 1
+        kmi.properties.useSidebarPanelOptions = True
 
     #------------------------------Object Mode----------------------------------------------------------------------------
 
