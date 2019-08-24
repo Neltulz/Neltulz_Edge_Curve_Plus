@@ -20,13 +20,18 @@ from bpy.types import (Panel,
 
 class NeltulzEdgeCurvePlus_IgnitProperties(bpy.types.PropertyGroup):
 
-    useEdgeFlowCheckbox : BoolProperty(
-        name="Use Edge Flow",
-        description="Applies edge flow to the newly created edge loops. (Default: True)",
-        default = True
+    exampleEnumItems = [
+        ("1", "Name1", "NAME1"),
+        ("2", "Name2", "NAME2"),
+    ]
+
+    exampleEnum : EnumProperty(
+        items=exampleEnumItems,
+        description="Description (Default: 1)",
+        default="1"
     )
 
-    numSegmentsSlider : IntProperty(
+    numSegments : IntProperty(
         name="Segment Number",
         description="Number of segments to add. (Default: 1)",
         default = 1,
@@ -34,7 +39,7 @@ class NeltulzEdgeCurvePlus_IgnitProperties(bpy.types.PropertyGroup):
         soft_max = 16
     )
 
-    numIterationsSlider : IntProperty(
+    numIterations : IntProperty(
         name="Number of Iterations",
         description="Number of iterations. (Default: 1)",
         default = 1,
@@ -42,7 +47,7 @@ class NeltulzEdgeCurvePlus_IgnitProperties(bpy.types.PropertyGroup):
         soft_max = 128
     )
 
-    tensionSlider : IntProperty(
+    tension : IntProperty(
         name="Tension",
         description="Tension (Default: 180)",
         default = 180,
@@ -50,10 +55,16 @@ class NeltulzEdgeCurvePlus_IgnitProperties(bpy.types.PropertyGroup):
         min = -500
     )
 
-    minAngleSlider : IntProperty(
+    minAngle : IntProperty(
         name="Minimum Angle",
         description="Minimum Angle (Default: 0)",
         default = 0,
         max = 180,
         min = 0
+    )
+
+    advancedSettings : BoolProperty(
+        name="Checkbox Name",
+        description="Use advanced settings. (Default: False)",
+        default = False
     )

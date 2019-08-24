@@ -3,20 +3,6 @@ from . properties import NeltulzEdgeCurvePlus_IgnitProperties
 from . import misc_functions
 from . import addon_utils
 
-from bpy.props import (StringProperty,
-                       BoolProperty,
-                       IntProperty,
-                       FloatProperty,
-                       FloatVectorProperty,
-                       EnumProperty,
-                       PointerProperty,
-                       )
-from bpy.types import (Panel,
-                       Operator,
-                       AddonPreferences,
-                       PropertyGroup,
-                       )
-
 # -----------------------------------------------------------------------------
 #    Main Addon Operator
 # -----------------------------------------------------------------------------    
@@ -27,51 +13,7 @@ class OBJECT_OT_NeltulzEdgeCurvePlus(bpy.types.Operator):
     bl_label = "Neltulz - Edge Curve Plus"
     bl_description = "Allows you to quick insert edges with flow"
 
-    useSidebarPanelOptions : BoolProperty(
-        name="Use Sidebar Panel Options",
-        description='Choose this if you want to use the "Neltulz - Edge Curve Plus" sidebar panel options when running this operator.  This will cause the panel to override these properties: "numSegments", "useEdgeFlow", "tension", "numIterations", "minAngle" (Default: True)',
-        default = True
-    )
 
-    numSegments : IntProperty(
-        name="Segment Number",
-        description="Number of segments to add. (Default: 1)",
-        default = 1,
-        min = 1,
-        soft_max = 16
-    )
-
-    useEdgeFlow : BoolProperty(
-        name="Use Edge Flow",
-        description='Allows you to use the EdgeFlow options (Tension, Num of iterations, Min Angle).  If this is disabled, then edges will be added without edge flow adjustments. (Default: True)',
-        default = True
-    )
-
-
-    tension : IntProperty(
-        name="Tension",
-        description="Tension (Default: 180)",
-        default = 180,
-        max = 500,
-        min = -500
-    )
-
-    numIterations : IntProperty(
-        name="Number of Iterations",
-        description="Number of iterations. (Default: 1)",
-        default = 1,
-        min = 1,
-        soft_max = 128
-    )
-
-
-    minAngle : IntProperty(
-        name="Minimum Angle",
-        description="Minimum Angle (Default: 0)",
-        default = 0,
-        max = 180,
-        min = 0
-    )
 
     @classmethod
     def poll(cls, context):
@@ -81,27 +23,6 @@ class OBJECT_OT_NeltulzEdgeCurvePlus(bpy.types.Operator):
 
         obj = context.object
         scene = context.scene
-
-        #declare
-        numSegments_final = None
-        useEdgeFlow_final = None
-        tension_final = None
-        numIterations_final = None
-        minAngle_final = None
-
-        if self.useSidebarPanelOptions:
-            numSegments_final = scene.neltulzEdgeCurvePlus.numSegmentsSlider
-            useEdgeFlow_final = scene.neltulzEdgeCurvePlus.useEdgeFlowCheckbox
-            tension_final = scene.neltulzEdgeCurvePlus.tensionSlider
-            numIterations_final = scene.neltulzEdgeCurvePlus.numIterationsSlider
-            minAngle_final = scene.neltulzEdgeCurvePlus.minAngleSlider
-        else:
-            numSegments_final = self.numSegments
-            useEdgeFlow_final = self.useEdgeFlow
-            tension_final = self.tension
-            numIterations_final = self.numIterations
-            minAngle_final = self.minAngle
-
 
         selectedVerts = misc_functions.getSelectedVerts(self, context, obj)
         if len(selectedVerts) > 0:
@@ -120,7 +41,7 @@ class OBJECT_OT_NeltulzEdgeCurvePlus(bpy.types.Operator):
 
             for edgeIndex in set(selectedEdgeIndices):
 
-                bpy.ops.mesh.loopcut(number_cuts=numSegments_final, object_index=0, edge_index=edgeIndex, mesh_select_mode_init=(False, True, False))
+                bpy.ops.mesh.loopcut(number_cuts=scene.neltulzEdgeCurvePlus.numSegments, object_index=0, edge_index=edgeIndex, mesh_select_mode_init=(False, True, False))
 
                 newEdges = misc_functions.getSelectedEdges(self, context, obj)
                 newEdgeIndices = list()
@@ -142,11 +63,14 @@ class OBJECT_OT_NeltulzEdgeCurvePlus(bpy.types.Operator):
             #switch to edit mode
             bpy.ops.object.mode_set(mode='EDIT')
             
-            if useEdgeFlow_final:
-                if addon_utils.check("EdgeFlow")[1]:
-                    bpy.ops.mesh.set_edge_flow(tension=tension_final, iterations=numIterations_final, min_angle=minAngle_final)
-                else:
-                    self.report({'ERROR'}, 'The "EdgeFlow" add-on could not be found.  Please check to see if the Edge Flow addon is installed and enabled.' )
+            if addon_utils.check("EdgeFlow")[1]:
+                print(scene.neltulzEdgeCurvePlus.tension)
+                print(scene.neltulzEdgeCurvePlus.numIterations)
+                print(scene.neltulzEdgeCurvePlus.minAngle)
+                
+                bpy.ops.mesh.set_edge_flow(tension=scene.neltulzEdgeCurvePlus.tension, iterations=scene.neltulzEdgeCurvePlus.numIterations, min_angle=scene.neltulzEdgeCurvePlus.minAngle)
+            else:
+                self.report({'ERROR'}, 'The "EdgeFlow" add-on could not be found.  Please check to see if the Edge Flow addon is installed and enabled.' )
         
         else:
             self.report({'ERROR'}, 'Please select something before running the script.' )
