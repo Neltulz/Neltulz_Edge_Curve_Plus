@@ -23,7 +23,7 @@ from bpy.types import (Panel,
 class OBJECT_PT_NeltulzEdgeCurvePlus(Panel):
 
     bl_idname = "object.neltulz_edge_curve_plus_panel"
-    bl_label = "Edge Curve Plus v1.0.1"
+    bl_label = "Edge Curve Plus v1.0.2"
     bl_category = "Edge Curve+"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
@@ -56,4 +56,10 @@ class OBJECT_PT_NeltulzEdgeCurvePlus(Panel):
         row = col.row(align=True)
 
         op = row.operator('object.neltulz_edge_curve_plus', text="Insert Edge(s)")
+        op.numSegments = scene.neltulzEdgeCurvePlus.numSegmentsSlider
+        op.useEdgeFlow = scene.neltulzEdgeCurvePlus.useEdgeFlowCheckbox
+        op.tension = scene.neltulzEdgeCurvePlus.tensionSlider
+        op.numIterations = scene.neltulzEdgeCurvePlus.numIterationsSlider
+        op.minAngle = scene.neltulzEdgeCurvePlus.minAngleSlider
+
         op = row.operator('object.neltulz_edge_curve_plus_reset_all', text="Reset All Settings")

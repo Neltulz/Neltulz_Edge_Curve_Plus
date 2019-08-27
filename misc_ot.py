@@ -16,8 +16,10 @@ from bpy.types import (Panel,
                        PropertyGroup,
                        )
 
+
+
 # -----------------------------------------------------------------------------
-#    Main Addon Operator
+#   Reset All Settings
 # -----------------------------------------------------------------------------    
 
 class OBJECT_OT_NeltulzEdgeCurvePlus_ResetAllSettings(bpy.types.Operator):
