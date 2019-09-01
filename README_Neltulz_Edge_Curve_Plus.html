@@ -97,7 +97,7 @@
 
                 <div class="reqDependencies"><span class="reqDepTitle">Required Dependencies:</span>
                     <div class="reqDepLinks">
-                        <a class="btn btn-secondary" href="https://github.com/BenjaminSauder/EdgeFlow/releases" target="_blank"><i class="fas fa-download"></i> EdgeFlow</a>
+                        <a class="btn btn-secondary" href="https://github.com/BenjaminSauder/EdgeFlow/releases" target="_blank"><i class="fas fa-download"></i> EdgeFlow v04 or newer</a>
                     </div>
                 </div>
                 
@@ -220,11 +220,20 @@
             <h3 id="howToUse">How to Use</h3>
             
             <div class="indentSection">
+
+                <ol>
+                    <li>Select an object in the 3d viewport</li>
+                    <li>Switch to <mark>Edit Mode</mark></li>
+                    <li>Select one or more <mark>Edge(s)</mark></li>
+                    <li>Press <mark>CTRL+SHIFT+E</mark> to insert an edge loop with flow</li>
+                    <li>Alternatively, you may use the <mark>Edge Curve+</mark> Sidebar panel to insert edges with flow</li>
+                    <li>Configure the options to your liking!</li>
+                </ol>
                 
                 <h5>Hotkeys</h5>
                 
                 <div class="alert alert-primary" role="alert">
-                    Note: Hotkey works in both <strong>"Object"</strong> and <strong>"Mesh"</strong> mode
+                    Note: Hotkey works in <strong>"Edit Mode"</strong> only.
                 </div>
 
                 <table class="table table-hover">
@@ -241,7 +250,7 @@
                             <td class="hotkey primary">ALT+SHIFT+E</td>
                             <td class="result success">Insert Edge Loop(s) with Flow</td>
                             <td class="command">object.neltulz_edge_curve_plus</td>
-                            <td class="properties">useSidebarPanelOptions = True</td>
+                            <td class="properties">numSegments = 1<br>useEdgeFlow = True<br>tension = 180<br>numIterations = 1<br>minAngle = 0</td>
                         </tr>
 
                     </tbody>
@@ -252,8 +261,7 @@
             <h3 id="knownIssues">Known Issues & Limitations</h3>
 
             <ul>
-                <li>Unable to modify history once edge loops are added.</li>
-                <li>Unable to <mark>Repeat Last</mark> (workaround: Just use <mark>ALT+SHIFT+E</mark> hotkey)</li>
+                <li>None</li>
             </ul>
 
             <h3 id="license">License</h3>
@@ -344,7 +352,12 @@
             <h3 id="changelog">Changelog</h3>
 
                 <ul>
-                    <li>2019-09-01 - Fixed zip file installing incorrectly by putting all files into a subfolder</li>
+                    <li>2019-09-01
+                        <ul>
+                            <li>Fixed zip file installing incorrectly by putting all files into a subfolder</li>
+                            <li>Fixed and improved the Readme HTML file</li>
+                        </ul>
+                    </li>
                     <li>2019-08-27
                         <ul>
                             <li>Added a missing "undo" option to the main operator.  You can now configure all of the
