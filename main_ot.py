@@ -1,7 +1,6 @@
 import bpy
 from . properties import NeltulzEdgeCurvePlus_IgnitProperties
 from . import misc_functions
-from . import addon_utils
 
 from bpy.props import (StringProperty,
                        BoolProperty,
@@ -117,10 +116,12 @@ class OBJECT_OT_NeltulzEdgeCurvePlus(bpy.types.Operator):
             #switch to edit mode
             bpy.ops.object.mode_set(mode='EDIT')
             
+            
+            #detect if EdgeFlow addon is installed and enabled
             if self.useEdgeFlow:
-                if addon_utils.check("EdgeFlow")[1]:
+                try:
                     bpy.ops.mesh.set_edge_flow(tension=self.tension, iterations=self.numIterations, min_angle=self.minAngle)
-                else:
+                except:
                     self.report({'ERROR'}, 'The "EdgeFlow" add-on could not be found.  Please check to see if the Edge Flow addon is installed and enabled.' )
         
         else:

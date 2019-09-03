@@ -23,7 +23,7 @@ from bpy.types import (Panel,
 class OBJECT_PT_NeltulzEdgeCurvePlus(Panel):
 
     bl_idname = "object.neltulz_edge_curve_plus_panel"
-    bl_label = "Edge Curve Plus v1.0.3"
+    bl_label = "Edge Curve Plus v1.0.4"
     bl_category = "Edge Curve+"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"

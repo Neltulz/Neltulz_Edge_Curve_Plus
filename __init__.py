@@ -3,7 +3,7 @@ bl_info = {
     "author" : "Neil V. Moore",
     "description" : "Allows you to quickly insert edge loops with flow (Requires edge flow addon)",
     "blender" : (2, 80, 0),
-    "version" : (1, 0, 3),
+    "version" : (1, 0, 4),
     "location" : "View3D",
     "warning" : "",
     "category" : "3D View",
