@@ -1,20 +1,10 @@
 import bpy
 from . properties import NeltulzEdgeCurvePlus_IgnitProperties
 from . import misc_functions
+from . import misc_layout
 
-from bpy.props import (StringProperty,
-                       BoolProperty,
-                       IntProperty,
-                       FloatProperty,
-                       FloatVectorProperty,
-                       EnumProperty,
-                       PointerProperty,
-                       )
-from bpy.types import (Panel,
-                       Operator,
-                       AddonPreferences,
-                       PropertyGroup,
-                       )
+from bpy.props import (StringProperty, BoolProperty, IntProperty, FloatProperty, FloatVectorProperty, EnumProperty, PointerProperty)
+from bpy.types import (Panel, Operator, AddonPreferences, PropertyGroup)
 
 # -----------------------------------------------------------------------------
 #   Panel
@@ -22,9 +12,9 @@ from bpy.types import (Panel,
 
 class OBJECT_PT_NeltulzEdgeCurvePlus(Panel):
 
-    bl_idname = "object.neltulz_edge_curve_plus_panel"
-    bl_label = "Edge Curve Plus v1.0.4"
-    bl_category = "Edge Curve+"
+    bl_idname = "ntz_edg_curv.panel"
+    bl_label = "Edge Curve Plus v1.0.5"
+    bl_category = "Neltulz"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
 
@@ -34,32 +24,48 @@ class OBJECT_PT_NeltulzEdgeCurvePlus(Panel):
         scene = context.scene
         obj = context.object
 
-        col = layout.column(align=True)
+        insertEdgesRow = layout.row(align=True)
+        insertEdgesRow.scale_y = 1.5
+        
+        op = insertEdgesRow.operator('ntz_edg_curv.insertedges', text="Insert Edge(s)", icon="OUTLINER_OB_CURVE")
+        
+        if scene.neltulzEdgeCurvePlus.numSegmentsSlider_Enable:      op.numSegments          = scene.neltulzEdgeCurvePlus.numSegmentsSlider
+        if scene.neltulzEdgeCurvePlus.useEdgeFlowCheckbox_Enable:    op.useEdgeFlow          = scene.neltulzEdgeCurvePlus.useEdgeFlowCheckbox
+        if scene.neltulzEdgeCurvePlus.tensionSlider_Enable:          op.tension              = scene.neltulzEdgeCurvePlus.tensionSlider
+        if scene.neltulzEdgeCurvePlus.numIterationsSlider_Enable:    op.numIterations        = scene.neltulzEdgeCurvePlus.numIterationsSlider
+        if scene.neltulzEdgeCurvePlus.minAngleSlider_Enable:         op.minAngle             = scene.neltulzEdgeCurvePlus.minAngleSlider
 
-        col.prop(context.scene.neltulzEdgeCurvePlus, "numSegmentsSlider", text="Number of segments" )
+        optionsSectionWrapper = layout.column(align=True)
 
-        col.separator()
+        #create show/hide toggle for options section
+        misc_layout.createShowHide(self, context, scene, "neltulzEdgeCurvePlus", "bShowOptions", None, "Options", optionsSectionWrapper)
 
-        col = layout.column(align=True)
+        if scene.neltulzEdgeCurvePlus.bShowOptions:
 
-        col.prop(context.scene.neltulzEdgeCurvePlus, "useEdgeFlowCheckbox", text="Use Edge Flow" )
+            optionsSectionRow = optionsSectionWrapper.row(align=True)
 
-        if scene.neltulzEdgeCurvePlus.useEdgeFlowCheckbox:
+            spacer = optionsSectionRow.column(align=True)
+            spacer.label(text="", icon="BLANK1")
 
-            col = layout.column(align=True)
+            optionsSection = optionsSectionRow.column(align=True)
 
-            col.prop(context.scene.neltulzEdgeCurvePlus, "tensionSlider", text="Tension" )
-            col.prop(context.scene.neltulzEdgeCurvePlus, "numIterationsSlider", text="Number of iterations" )
-            col.prop(context.scene.neltulzEdgeCurvePlus, "minAngleSlider", text="Min Angle" )
+            optionsSection.separator()
 
-        col = layout.column(align=True)
-        row = col.row(align=True)
+            misc_layout.createPropWithHideButton(self, context, scene, "neltulzEdgeCurvePlus", "numSegmentsSlider", "numSegmentsSlider_Enable", None, optionsSection)
+            optionsSection.separator()
 
-        op = row.operator('object.neltulz_edge_curve_plus', text="Insert Edge(s)")
-        op.numSegments = scene.neltulzEdgeCurvePlus.numSegmentsSlider
-        op.useEdgeFlow = scene.neltulzEdgeCurvePlus.useEdgeFlowCheckbox
-        op.tension = scene.neltulzEdgeCurvePlus.tensionSlider
-        op.numIterations = scene.neltulzEdgeCurvePlus.numIterationsSlider
-        op.minAngle = scene.neltulzEdgeCurvePlus.minAngleSlider
+            misc_layout.createPropWithHideButton(self, context, scene, "neltulzEdgeCurvePlus", "useEdgeFlowCheckbox", "useEdgeFlowCheckbox_Enable", None, optionsSection)
+            optionsSection.separator()
 
-        op = row.operator('object.neltulz_edge_curve_plus_reset_all', text="Reset All Settings")
+            if scene.neltulzEdgeCurvePlus.useEdgeFlowCheckbox:
+
+                edgeFlowProperties = optionsSection.column(align=True)
+
+                misc_layout.createPropWithHideButton(self, context, scene, "neltulzEdgeCurvePlus", "tensionSlider",       "tensionSlider_Enable",       None,      edgeFlowProperties)
+                misc_layout.createPropWithHideButton(self, context, scene, "neltulzEdgeCurvePlus", "numIterationsSlider", "numIterationsSlider_Enable", None,      edgeFlowProperties)
+                misc_layout.createPropWithHideButton(self, context, scene, "neltulzEdgeCurvePlus", "minAngleSlider",      "minAngleSlider_Enable",      None,      edgeFlowProperties)
+
+            optionsSection.separator()
+            
+            resetButton = optionsSection.column(align=True)
+            op = resetButton.operator('ntz_edg_curv.resetallsettings', text="Reset All Settings")

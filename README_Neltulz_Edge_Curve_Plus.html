@@ -10,11 +10,11 @@
         <meta name="twitter:card" value="summary">
 
         <!-- Open Graph data -->
-        <meta property="og:title" content="Neltulz - Edge Curve Plus v1.0.4" />
+        <meta property="og:title" content="Neltulz - Edge Curve Plus v1.0.5" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.logichaos.com/neltulz_blender_addons/neltulz_edge_curve_plus/README_Neltulz_Edge_Curve_Plus"/>
         <meta property="og:image" content="https://www.logichaos.com/neltulz_blender_addons/neltulz_edge_curve_plus/readme_html_files/img/logo.png" />
-        <meta property="og:description" content="Updated: 8/27/2019 - Blender Addon that allows you to quickly insert edge loops with flow. (Requires the EdgeFlow addon for Blender)" />
+        <meta property="og:description" content="Updated: 12/23/2019 - Blender Addon that allows you to quickly insert edge loops with flow. (Requires the EdgeFlow addon for Blender)" />
 
         <link href="readme_html_files/fontawesome-free-5.10.1-web/css/all.min.css" rel="stylesheet">
         <link rel="stylesheet" href="readme_html_files/css/bootstrap-reboot.min.css">
@@ -79,7 +79,7 @@
             </picture>
 
             <h1 class="pageTitle">
-                Neltulz - Edge Curve Plus<br><span class="versionNum">Version: 1.0.4<br>Last Update: 9/3/2019</span>
+                Neltulz - Edge Curve Plus<br><span class="versionNum">Version: 1.0.5<br>Last Update: 12/23/2019</span>
             </h1>
 
             <div class="versionAndDownloadBar">
@@ -249,8 +249,8 @@
                         <tr>
                             <td class="hotkey primary">ALT+SHIFT+E</td>
                             <td class="result success">Insert Edge Loop(s) with Flow</td>
-                            <td class="command">object.neltulz_edge_curve_plus</td>
-                            <td class="properties">numSegments = 1<br>useEdgeFlow = True<br>tension = 180<br>numIterations = 1<br>minAngle = 0</td>
+                            <td class="command">ntz_edg_curv.insertedges</td>
+                            <td class="properties">numSegments = 1<br>useEdgeFlow = True<br>tension = 180<br>numIterations = 4<br>minAngle = 0</td>
                         </tr>
 
                     </tbody>
@@ -352,6 +352,14 @@
             <h3 id="changelog">Changelog</h3>
 
                 <ul>
+                    <li>2019-12-23
+                        <ul>
+                            <li>Set default sidebar tab name to "Neltulz" so that all Neltulz related sidebars from various Neltulz add-ons will be organized here.</li>
+                            <li>Changed operator bl_idnames to improve organization. This may break things if you've added operators to any custom pie menus.  Sorry for the inconvenience.</li>
+                            <li>Improved sidebar panel significantly.  Better use of space.</li>
+                            <li>Set default iteration count to 4 instead of 1.  This provides better results most situations.</li>
+                        </ul>
+                    </li>
                     <li>2019-09-03
                         <ul>
                             <li>Removed addon_utils.py</li>

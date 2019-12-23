@@ -2,19 +2,8 @@ import bpy
 from . properties import NeltulzEdgeCurvePlus_IgnitProperties
 from . import misc_functions
 
-from bpy.props import (StringProperty,
-                       BoolProperty,
-                       IntProperty,
-                       FloatProperty,
-                       FloatVectorProperty,
-                       EnumProperty,
-                       PointerProperty,
-                       )
-from bpy.types import (Panel,
-                       Operator,
-                       AddonPreferences,
-                       PropertyGroup,
-                       )
+from bpy.props import (StringProperty, BoolProperty, IntProperty, FloatProperty, FloatVectorProperty, EnumProperty, PointerProperty)
+from bpy.types import (Panel, Operator, AddonPreferences, PropertyGroup)
 
 # -----------------------------------------------------------------------------
 #    Main Addon Operator
@@ -22,10 +11,10 @@ from bpy.types import (Panel,
 
 class OBJECT_OT_NeltulzEdgeCurvePlus(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "object.neltulz_edge_curve_plus"
+    bl_idname = "ntz_edg_curv.insertedges"
     bl_label = "Neltulz - Edge Curve Plus"
     bl_description = "Allows you to quick insert edges with flow"
-    bl_options = {'REGISTER', 'UNDO'}
+    bl_options = {'REGISTER', 'UNDO', 'PRESET'}
 
     numSegments : IntProperty(
         name="Segment Number",
@@ -40,7 +29,6 @@ class OBJECT_OT_NeltulzEdgeCurvePlus(bpy.types.Operator):
         description='Allows you to use the EdgeFlow options (Tension, Num of iterations, Min Angle).  If this is disabled, then edges will be added without edge flow adjustments. (Default: True)',
         default = True
     )
-
 
     tension : IntProperty(
         name="Tension",

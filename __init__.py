@@ -3,7 +3,7 @@ bl_info = {
     "author" : "Neil V. Moore",
     "description" : "Allows you to quickly insert edge loops with flow (Requires edge flow addon)",
     "blender" : (2, 80, 0),
-    "version" : (1, 0, 4),
+    "version" : (1, 0, 5),
     "location" : "View3D",
     "warning" : "",
     "category" : "3D View",
@@ -77,4 +77,4 @@ if __name__ == "__main__":
     register()
 
     # test call
-    bpy.ops.object.neltulz_edge_curve_plus()
+    bpy.ops.ntz_edg_curv.insertedges()

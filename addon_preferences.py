@@ -4,19 +4,8 @@
 import bpy
 from . panels import OBJECT_PT_NeltulzEdgeCurvePlus
 
-from bpy.props import (StringProperty,
-                       BoolProperty,
-                       IntProperty,
-                       FloatProperty,
-                       FloatVectorProperty,
-                       EnumProperty,
-                       PointerProperty,
-                       )
-from bpy.types import (Panel,
-                       Operator,
-                       AddonPreferences,
-                       PropertyGroup,
-                       )
+from bpy.props import (StringProperty, BoolProperty, IntProperty, FloatProperty, FloatVectorProperty, EnumProperty, PointerProperty)
+from bpy.types import (Panel, Operator, AddonPreferences, PropertyGroup)
 
 # Define Panel classes for updating
 panels = (
@@ -50,7 +39,7 @@ class OBJECT_OT_NeltulzEdgeCurvePlus_Preferences(AddonPreferences):
     category: StringProperty(
             name="Tab Category",
             description="Choose a name for the category of the panel",
-            default="Edge Curve+",
+            default="Neltulz",
             update=update_panel
             )
 
