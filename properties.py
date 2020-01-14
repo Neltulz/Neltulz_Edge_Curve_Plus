@@ -4,7 +4,7 @@ from . import misc_functions
 from bpy.props import (StringProperty, BoolProperty, IntProperty, FloatProperty, FloatVectorProperty, EnumProperty, PointerProperty)
 from bpy.types import (Panel, Operator, AddonPreferences, PropertyGroup)
 
-class NeltulzEdgeCurvePlus_IgnitProperties(bpy.types.PropertyGroup):
+class NTZEDGCRV_ignitproperties(bpy.types.PropertyGroup):
 
     bShowOptions : BoolProperty (
         name="Show Options",
@@ -12,21 +12,20 @@ class NeltulzEdgeCurvePlus_IgnitProperties(bpy.types.PropertyGroup):
         default = False,
     )
 
-    useEdgeFlowCheckbox_Enable : BoolProperty(
-        name="Enable Use Edge Flow",
-        description='Enables the "Use Edge Flow Checkbox" (Default: True)',
-        default = True
+    customEdgeCurveSettings_List = [
+        ("UNSET",        "Unset (Use Last Known)",         "", "",  0),
+        ("USE",          "Custom",                         "", "",  1),
+    ]
+
+    customEdgeCurveSettings : EnumProperty (
+        items       = customEdgeCurveSettings_List,
+        name        = "Use Custom Edge Curve Settings",
+        default     = "USE"
     )
 
     useEdgeFlowCheckbox : BoolProperty(
         name="Use Edge Flow",
         description="Applies edge flow to the newly created edge loops. (Default: True)",
-        default = True
-    )
-
-    numSegmentsSlider_Enable : BoolProperty (
-        name="Enable Num Segments Slider",
-        description="Enables the Num Segments Slider (Default: True)",
         default = True
     )
 
@@ -38,12 +37,6 @@ class NeltulzEdgeCurvePlus_IgnitProperties(bpy.types.PropertyGroup):
         soft_max = 16
     )
 
-    numIterationsSlider_Enable : BoolProperty (
-        name="Enable numIterationsSlider",
-        description="Enables the numIterationsSlider (Default: True)",
-        default = True
-    )
-
     numIterationsSlider : IntProperty(
         name="Num Iterations",
         description="Number of iterations. (Default: 1)",
@@ -52,24 +45,12 @@ class NeltulzEdgeCurvePlus_IgnitProperties(bpy.types.PropertyGroup):
         soft_max = 128
     )
 
-    tensionSlider_Enable : BoolProperty (
-        name="Enable Tension",
-        description="Enables the Tension slider",
-        default = True
-    )
-
     tensionSlider : IntProperty(
         name="Tension",
         description="Tension (Default: 180)",
         default = 180,
         max = 500,
         min = -500
-    )
-
-    minAngleSlider_Enable : BoolProperty (
-        name="Enable minAngleSlider",
-        description="Enables the minAngleSlider",
-        default = True
     )
 
     minAngleSlider : IntProperty(

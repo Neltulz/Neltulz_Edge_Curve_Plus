@@ -2,20 +2,25 @@
 # recommended by "cytoo"
 
 import bpy
-from . panels import OBJECT_PT_NeltulzEdgeCurvePlus
+from . panels import NTZEDGCRV_PT_sidebarpanel
 
 from bpy.props import (StringProperty, BoolProperty, IntProperty, FloatProperty, FloatVectorProperty, EnumProperty, PointerProperty)
 from bpy.types import (Panel, Operator, AddonPreferences, PropertyGroup)
 
 # Define Panel classes for updating
 panels = (
-        OBJECT_PT_NeltulzEdgeCurvePlus,
+        NTZEDGCRV_PT_sidebarpanel,
         )
 
         
 
 def update_panel(self, context):
-    message = "Neltulz - Edge Curve Plus: Updating Panel locations has failed"
+
+    sidebarPanelSize_PropVal        = context.preferences.addons[__package__].preferences.sidebarPanelSize
+    category_PropVal                = context.preferences.addons[__package__].preferences.category
+    popupAndPiePanelSize_PropVal    = context.preferences.addons[__package__].preferences.popupAndPiePanelSize
+
+    message = "Neltulz - Edge Curve: Updating Panel locations has failed"
     try:
         for panel in panels:
             if "bl_rna" in panel.__dict__:
@@ -23,7 +28,25 @@ def update_panel(self, context):
 
         #Whatever the user typed into the text box in the add-ons settings, set that as the addon's tab category name
         for panel in panels:
-            panel.bl_category = context.preferences.addons[__package__].preferences.category
+            
+            if sidebarPanelSize_PropVal == "HIDE":
+                panel.bl_category = ""
+                panel.bl_region_type = "WINDOW"
+
+            else:
+                if self.sidebarPanelSize == "DEFAULT":
+                    panel.bUseCompactSidebarPanel = False
+                else:
+                    panel.bUseCompactSidebarPanel = True
+
+                panel.bl_category = category_PropVal
+                panel.bl_region_type = "UI"
+
+            if self.popupAndPiePanelSize == "DEFAULT":
+                panel.bUseCompactPopupAndPiePanel = False
+            else:
+                panel.bUseCompactPopupAndPiePanel = True
+
             bpy.utils.register_class(panel)
 
     except Exception as e:
@@ -31,22 +54,61 @@ def update_panel(self, context):
         pass
 
 
-class OBJECT_OT_NeltulzEdgeCurvePlus_Preferences(AddonPreferences):
+class NTZEDGCRV_OT_addonprefs(AddonPreferences):
     # this must match the addon name, use '__package__'
     # when defining this in a submodule of a python package.
     bl_idname = __package__
 
     category: StringProperty(
-            name="Tab Category",
-            description="Choose a name for the category of the panel",
-            default="Neltulz",
-            update=update_panel
-            )
+        name="Tab Category",
+        description="Choose a name for the category of the panel",
+        default="Neltulz",
+        update=update_panel,
+    )
+        
+    sidebarpanelSize_List = [
+        ("DEFAULT", "Default", "", "", 0),
+        ("COMPACT", "Compact", "", "", 1),
+        ("HIDE",    "Hide",    "", "", 2),
+    ]
+
+    popupAndPiePanelSize_List = [
+        ("DEFAULT", "Default", "", "", 0),
+        ("COMPACT", "Compact", "", "", 1),
+    ]
+
+    sidebarPanelSize : EnumProperty (
+        items       = sidebarpanelSize_List,
+        name        = "Sidebar Panel Size",
+        description = "Sidebar Panel Size",
+        default     = "DEFAULT",
+        update=update_panel,
+    )
+
+    popupAndPiePanelSize : EnumProperty (
+        items       = popupAndPiePanelSize_List,
+        name        = "Popup & Pie Panel Size",
+        description = "Popup & Pie Panel Size",
+        default     = "COMPACT",
+        update=update_panel,
+    )
 
     def draw(self, context):
+
+        from . misc_layout import createProp
         layout = self.layout
 
-        row = layout.row()
-        col = row.column()
-        col.label(text="Tab Category:")
-        col.prop(self, "category", text="")
+        labelWidth = 7
+        labelJustify = "RIGHT"
+        propJustify = "LEFT"
+        propWidth = 15
+        propHeight = 1.25
+
+        if self.sidebarPanelSize == "HIDE":
+            bTabCatEnabled = False
+        else:
+            bTabCatEnabled = True
+
+        createProp(self, context, None, True,           "Sidebar Panel",       self, "sidebarPanelSize",      propHeight, labelWidth, propWidth, labelJustify, propJustify, None,  True, False, layout)
+        createProp(self, context, None, bTabCatEnabled, "Tab Category",        self, "category",              propHeight, labelWidth, propWidth, labelJustify, propJustify, "",    True, False, layout)
+        createProp(self, context, None, True,           "Popup & Pie Panel",   self, "popupAndPiePanelSize",  propHeight, labelWidth, propWidth, labelJustify, propJustify, None,  True, False, layout)

@@ -1,19 +1,25 @@
 import bpy
-from . properties import NeltulzEdgeCurvePlus_IgnitProperties
+from . properties import NTZEDGCRV_ignitproperties
 from . import misc_functions
 
 from bpy.props import (StringProperty, BoolProperty, IntProperty, FloatProperty, FloatVectorProperty, EnumProperty, PointerProperty)
 from bpy.types import (Panel, Operator, AddonPreferences, PropertyGroup)
 
 # -----------------------------------------------------------------------------
-#   Reset All Settings
+#   Reset Settings
 # -----------------------------------------------------------------------------    
 
-class OBJECT_OT_NeltulzEdgeCurvePlus_ResetAllSettings(bpy.types.Operator):
+class NTZEDGCRV_OT_resetsettings(bpy.types.Operator):
     """Tooltip"""
-    bl_idname = "ntz_edg_curv.resetallsettings"
-    bl_label = "Neltulz - Edge Curve Plus : Reset All Settings"
-    bl_description = "Resets all settings"
+    bl_idname = "ntzedgcrv.resetsettings"
+    bl_label = "Neltulz - Edge Curve : Reset Setting(s)"
+    bl_description = "Resets setting(s)"
+
+    settingToReset : StringProperty(
+        name="Setting to Reset",
+        description='Name of the setting to be reset',
+        default = "NONE"
+    )
 
     @classmethod
     def poll(cls, context):
@@ -21,22 +27,24 @@ class OBJECT_OT_NeltulzEdgeCurvePlus_ResetAllSettings(bpy.types.Operator):
 
     def execute(self, context):
 
-        scene = context.scene
+        scn = context.scene
 
-        scene.neltulzEdgeCurvePlus.numSegmentsSlider_Enable     = True
-        scene.neltulzEdgeCurvePlus.numSegmentsSlider            = 1
+        defaultSettingsDict = {
+            "numSegmentsSlider"             : 1,
+            "useEdgeFlowCheckbox"           : True,
+            "tensionSlider"                 : 180,
+            "numIterationsSlider"           : 4,
+            "minAngleSlider"                : 0,
+        }
 
-        scene.neltulzEdgeCurvePlus.useEdgeFlowCheckbox_Enable   = True
-        scene.neltulzEdgeCurvePlus.useEdgeFlowCheckbox          = True
-        
-        scene.neltulzEdgeCurvePlus.tensionSlider_Enable         = True
-        scene.neltulzEdgeCurvePlus.tensionSlider                = 180
-        
-        scene.neltulzEdgeCurvePlus.numIterationsSlider_Enable   = True
-        scene.neltulzEdgeCurvePlus.numIterationsSlider          = 4
-        
-        scene.neltulzEdgeCurvePlus.minAngleSlider_Enable        = True
-        scene.neltulzEdgeCurvePlus.minAngleSlider               = 0
+        if self.settingToReset == "ALL":
+
+            for key in defaultSettingsDict:
+                setattr(scn.ntzedgcrv, key, defaultSettingsDict[key])
+
+        elif self.settingToReset != "NONE":
+            key = self.settingToReset
+            setattr(scn.ntzedgcrv, key, defaultSettingsDict[key])
 
         return {'FINISHED'}
     # END execute()

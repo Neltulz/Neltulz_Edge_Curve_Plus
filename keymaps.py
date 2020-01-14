@@ -1,5 +1,5 @@
 import bpy
-from . properties import NeltulzEdgeCurvePlus_IgnitProperties
+from . properties import NTZEDGCRV_ignitproperties
 
 # -----------------------------------------------------------------------------
 #    Keymaps (For Register)
@@ -11,7 +11,7 @@ def neltulz_edge_curve_plus_register_keymaps(addon_keymaps):
 
     def createEdgeCurvePlusKeymap():
         #create shortcuts for keymap
-        kmi = km.keymap_items.new("ntz_edg_curv.insertedges", type = "E", ctrl=False, shift=True, alt=True, value = "PRESS")
+        kmi = km.keymap_items.new("ntzedgcrv.insertedges", type = "E", ctrl=False, shift=True, alt=True, value = "PRESS")
         kmi.properties.numSegments = 1
         kmi.properties.useEdgeFlow = True
         kmi.properties.tension = 180

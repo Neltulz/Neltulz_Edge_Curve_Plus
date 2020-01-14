@@ -1,9 +1,9 @@
 bl_info = {
-    "name" : "Neltulz - Edge Curve Plus",
+    "name" : "Neltulz - Edge Curve",
     "author" : "Neil V. Moore",
     "description" : "Allows you to quickly insert edge loops with flow (Requires edge flow addon)",
     "blender" : (2, 80, 0),
-    "version" : (1, 0, 5),
+    "version" : (1, 0, 6),
     "location" : "View3D",
     "warning" : "",
     "category" : "3D View",
@@ -17,27 +17,34 @@ bl_info = {
 
 import bpy
 
-from . properties import NeltulzEdgeCurvePlus_IgnitProperties
-from . main_ot import OBJECT_OT_NeltulzEdgeCurvePlus
-from . misc_ot import OBJECT_OT_NeltulzEdgeCurvePlus_ResetAllSettings
-from . addon_preferences import OBJECT_OT_NeltulzEdgeCurvePlus_Preferences
-from . panels import OBJECT_PT_NeltulzEdgeCurvePlus
+from . properties        import NTZEDGCRV_ignitproperties
+from . main_ot           import NTZEDGCRV_OT_insertedges
+from . misc_ot           import NTZEDGCRV_OT_resetsettings
+from . addon_preferences import NTZEDGCRV_OT_addonprefs
+from . panels            import NTZEDGCRV_PT_options
+from . panels            import NTZEDGCRV_PT_sidebarpanel
 
 from . import keymaps
 
 PendingDeprecationWarning
 
+bDebugModeActive = False
+if bDebugModeActive:
+    print("##################################################################################################################################################################")
+    print("REMINDER: DEBUG MODE ACTIVE")
+    print("##################################################################################################################################################################")
 
 # -----------------------------------------------------------------------------
 #    Store classes in List so that they can be easily registered/unregistered    
 # -----------------------------------------------------------------------------  
 
 classes = (
-    NeltulzEdgeCurvePlus_IgnitProperties,
-    OBJECT_OT_NeltulzEdgeCurvePlus,
-    OBJECT_OT_NeltulzEdgeCurvePlus_ResetAllSettings,
-    OBJECT_OT_NeltulzEdgeCurvePlus_Preferences,
-    OBJECT_PT_NeltulzEdgeCurvePlus,
+    NTZEDGCRV_ignitproperties,
+    NTZEDGCRV_OT_insertedges,
+    NTZEDGCRV_OT_resetsettings,
+    NTZEDGCRV_OT_addonprefs,
+    NTZEDGCRV_PT_options,
+    NTZEDGCRV_PT_sidebarpanel,
 )
 
 # -----------------------------------------------------------------------------
@@ -46,19 +53,28 @@ classes = (
 
 addon_keymaps = []
 
+#vscode pme workaround from iceythe (part 2 of 2)
+def _reg():
+    pme = bpy.utils._preferences.addons['pie_menu_editor'].preferences
+    for pm in pme.pie_menus:
+        if pm.key != 'NONE':
+            pm.register_hotkey()
+#END vscode pme workaround (part 2 of 2)
+
 def register():
     from bpy.utils import register_class
     for cls in classes:
         register_class(cls)
 
     # update panel name
-    addon_preferences.update_panel(None, bpy.context)
+    prefs = bpy.context.preferences.addons[__name__].preferences
+    addon_preferences.update_panel(prefs, bpy.context)
 
     #add keymaps from keymaps.py
     keymaps.neltulz_edge_curve_plus_register_keymaps(addon_keymaps)
 
     #add property group to the scene
-    bpy.types.Scene.neltulzEdgeCurvePlus = bpy.props.PointerProperty(type=NeltulzEdgeCurvePlus_IgnitProperties)
+    bpy.types.Scene.ntzedgcrv = bpy.props.PointerProperty(type=NTZEDGCRV_ignitproperties)
 
     
 
@@ -77,4 +93,4 @@ if __name__ == "__main__":
     register()
 
     # test call
-    bpy.ops.ntz_edg_curv.insertedges()
+    bpy.ops.ntzedgcrv.insertedges()
