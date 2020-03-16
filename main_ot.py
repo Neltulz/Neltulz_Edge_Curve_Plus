@@ -69,7 +69,7 @@ class NTZEDGCRV_OT_insertedges(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return (context.object.type == 'MESH' and bpy.context.object.mode == "EDIT")
+        return (context.object.type == 'MESH' and bpy.context.mode == "EDIT_MESH")
 
 
     def draw(self, context):

@@ -29,7 +29,7 @@ class NTZEDGCRV_PT_options(Panel):
     #END draw()
 
 class NTZEDGCRV_PT_sidebarpanel(Panel):
-    bl_label = "Edge Curve Plus v1.0.6"
+    bl_label = "Edge Curve Plus v1.0.7"
     bl_category = "Neltulz"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
